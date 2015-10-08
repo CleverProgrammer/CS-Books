@@ -1,7 +1,7 @@
 def encoder(message):
     encoded_message = ''
     for ch in message:
-        encoded_message += str(ord(ch))
+        encoded_message += str(ord(ch)) + chr(32)
     return encoded_message
 
 if __name__ == "__main__":
