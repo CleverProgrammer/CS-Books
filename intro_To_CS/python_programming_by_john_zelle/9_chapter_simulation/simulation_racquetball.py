@@ -15,9 +15,10 @@ import random
 # 6. If server wins the point, a point is awarded.
 # 7. Players can only score during their own service.
 # 8. First player to reach 15 points first wins the game.
+# Note: The program will judge the players' skill based on their probability,
+# If they have 0.6 score, that means they should win 60% of the points.
 
-# The program will judge the players' skill based on their probability,
-# If they have 0.6 score, that means they should win 60% of the games.
+
 def print_intro():
     """
     This prints the intro to the racquetball game
@@ -43,17 +44,16 @@ def get_inputs():
     return player_a, player_b, sim_n_games
 
 
-def simulate_games(player_a, player_b, sim_n_games):
+def simulate_games(player_a, player_b, number_of_games):
     """
-    Given two players' probabilities for winning and N simulations,
-    it prints out their simulated result after N games.
+    Simulates N games and returns wins_a and wins_b.
     """
     # I create lists containining 1's and 0's. I then use it to simulate weighted probability.
     player_a_probability = [1 for _ in range(player_a)] + [0 for _ in range(10 - player_a)]
     player_b_probability = [1 for _ in range(player_b)] + [0 for _ in range(10 - player_b)]
     wins_a = 0
     wins_b = 0
-    for i in range(sim_n_games):
+    for i in range(number_of_games):
         if random.choice(player_a_probability) > random.choice(player_b_probability):
             wins_a += 1
         elif random.choice(player_a_probability) < random.choice(player_b_probability):
@@ -74,6 +74,9 @@ def print_summary(wins_a, wins_b, sim_n_games):
 
 
 def main():
+    """
+    This is the interface or the signature of the function.
+    """
     print_intro()
     player_a, player_b, sim_n_games = get_inputs()
     wins_a, wins_b = simulate_games(player_a, player_b, sim_n_games)
