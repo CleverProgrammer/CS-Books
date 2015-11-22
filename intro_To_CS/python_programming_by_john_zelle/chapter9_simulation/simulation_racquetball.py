@@ -34,14 +34,20 @@ def print_intro():
 def get_inputs():
     """
     Takes inputs from the user and just returns them.
-    :param player_a: float between 0 and 1
-    :param player_b: float between 0 and 1
+    :player_a: float between 0 and 1
+    :player_b: float between 0 and 1
     :return: tuple
     """
     player_a = int(float(input('Enter the probability that PLAYER A wins the serve: ')) * 10)
     player_b = int(float(input('Enter the probability that PLAYER B wins the serve: ')) * 10)
     sim_n_games = int(input('How many games would you like to simulate: '))
     return player_a, player_b, sim_n_games
+
+
+def simulate_one_game(player_a, player_b):
+    """
+    Simulates one racquetball game and returns the winner.
+    """
 
 
 def simulate_games(player_a, player_b, number_of_games):
