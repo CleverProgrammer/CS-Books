@@ -7,3 +7,7 @@
 
 # pycharm ide misc
 *.idea/
+*.pyc
+*.ideaproject/
+*.idea/
+*.ropeproject/
