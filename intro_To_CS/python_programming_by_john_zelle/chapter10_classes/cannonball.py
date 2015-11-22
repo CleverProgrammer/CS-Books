@@ -15,16 +15,17 @@ def in_circle(mouse_point, circle_origin, radius):
 
 
 def main():
-    win = GraphWin('Circle')
+    win = GraphWin('THE GAME OF GAMES!')
     circle_origin = Point(100, 100)
     my_circle = Circle(circle_origin, 20)
     my_circle.draw(win)
     for i in range(10):
         try:
+            my_circle.move(2, 2)
             mouse_position = win.getMouse()
             print('You clicked at', mouse_position.getX(), mouse_position.getY())
             print('Radius', my_circle.getRadius())
-            if in_circle(mouse_position, circle_origin, my_circle.radius):
+            if in_circle(mouse_position, my_circle.getCenter(), my_circle.radius):
                 print('You clicked inside the circle!')
         except GraphicsError:
             print('You closed the graphics window!')
