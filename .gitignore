@@ -1,0 +1,9 @@
+# python misc
+*.swp
+*.pyc
+
+# vim ide misc
+*.ropeprojects/
+
+# pycharm ide misc
+*.idea/
