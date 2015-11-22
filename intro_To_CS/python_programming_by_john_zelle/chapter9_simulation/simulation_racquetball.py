@@ -44,10 +44,25 @@ def get_inputs():
     return player_a, player_b, sim_n_games
 
 
+def game_over(score_a, score_b):
+    if score_a + score_b == 15:
+        return False
+
+
 def simulate_one_game(player_a, player_b):
     """
     Simulates one racquetball game and returns the winner.
     """
+    score_a = score_b = 0
+    serving = 'A'
+    while not game_over(score_a, score_b):
+        if serving == 'A':
+            if player_a > random.random():
+                score_a += 1
+            else:
+                serving = 'B'
+
+    return score_a, score_b
 
 
 def simulate_games(player_a, player_b, number_of_games):
@@ -55,21 +70,13 @@ def simulate_games(player_a, player_b, number_of_games):
     Simulates N games and returns wins_a and wins_b.
     """
     # I create lists containining 1's and 0's. I then use it to simulate weighted probability.
-    player_a_probability = [1 for _ in range(player_a)] + [0 for _ in range(10 - player_a)]
-    player_b_probability = [1 for _ in range(player_b)] + [0 for _ in range(10 - player_b)]
-    wins_a = 0
-    wins_b = 0
+    wins_a = wins_b = 0
     for i in range(number_of_games):
-        if random.choice(player_a_probability) > random.choice(player_b_probability):
+        score_a, score_b = simulate_one_game(player_a, player_b)
+        if score_a > score_b:
             wins_a += 1
-        elif random.choice(player_a_probability) < random.choice(player_b_probability):
-            wins_b += 1
         else:
-            # If they are both equal, select one of them randomly to be the winner.
-            if random.randint(0, 1) == 0:
-                wins_a += 1
-            else:
-                wins_b += 1
+            wins_b += 1
     return wins_a, wins_b
 
 
