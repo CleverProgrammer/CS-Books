@@ -5,9 +5,8 @@ Date: 11/21/2015
 """
 import random
 
+
 FINAL_SCORE = 15
-
-
 # Racquetball Game Rules:
 # 1. First move is called the Serve.
 # 2. Alternating turns with legal moves is called a Rally.
