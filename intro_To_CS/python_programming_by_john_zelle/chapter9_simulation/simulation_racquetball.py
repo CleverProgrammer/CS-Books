@@ -5,6 +5,8 @@ Date: 11/21/2015
 """
 import random
 
+FINAL_SCORE = 15
+
 
 # Racquetball Game Rules:
 # 1. First move is called the Serve.
@@ -17,6 +19,16 @@ import random
 # 8. First player to reach 15 points first wins the game.
 # Note: The program will judge the players' skill based on their probability,
 # If they have 0.6 score, that means they should win 60% of the points.
+
+
+def main():
+    """
+    This is the interface or the signature of the function.
+    """
+    print_intro()
+    player_a, player_b, sim_n_games = get_inputs()
+    wins_a, wins_b = simulate_games(player_a, player_b, sim_n_games)
+    print_summary(wins_a, wins_b, sim_n_games)
 
 
 def print_intro():
@@ -38,15 +50,10 @@ def get_inputs():
     :player_b: float between 0 and 1
     :return: tuple
     """
-    player_a = int(float(input('Enter the probability that PLAYER A wins the serve: ')) * 10)
-    player_b = int(float(input('Enter the probability that PLAYER B wins the serve: ')) * 10)
+    player_a = float(input('Enter the probability that PLAYER A wins the serve: '))
+    player_b = float(input('Enter the probability that PLAYER B wins the serve: '))
     sim_n_games = int(input('How many games would you like to simulate: '))
     return player_a, player_b, sim_n_games
-
-
-def game_over(score_a, score_b):
-    if score_a + score_b == 15:
-        return False
 
 
 def simulate_one_game(player_a, player_b):
@@ -61,6 +68,11 @@ def simulate_one_game(player_a, player_b):
                 score_a += 1
             else:
                 serving = 'B'
+        else:
+            if player_b > random.random():
+                score_b += 1
+            else:
+                serving = 'A'
 
     return score_a, score_b
 
@@ -80,20 +92,14 @@ def simulate_games(player_a, player_b, number_of_games):
     return wins_a, wins_b
 
 
+def game_over(score_a, score_b):
+    return FINAL_SCORE in (score_a, score_b)
+
+
 def print_summary(wins_a, wins_b, sim_n_games):
     print('Games Simulated: {0}'.format(sim_n_games))
-    print('Wins for A: {0} ({1}%)'.format(wins_a, (round((wins_a / sim_n_games) * 100, 2))))
-    print('Wins for B: {0} ({1}%)'.format(wins_b, (round((wins_b / sim_n_games) * 100, 2))))
-
-
-def main():
-    """
-    This is the interface or the signature of the function.
-    """
-    print_intro()
-    player_a, player_b, sim_n_games = get_inputs()
-    wins_a, wins_b = simulate_games(player_a, player_b, sim_n_games)
-    print_summary(wins_a, wins_b, sim_n_games)
+    print('Wins for A: {0} ({1:0.1%})'.format(wins_a, wins_a / sim_n_games))
+    print('Wins for B: {0} ({1:0.1%})'.format(wins_b, wins_b / sim_n_games))
 
 
 if __name__ == '__main__':
