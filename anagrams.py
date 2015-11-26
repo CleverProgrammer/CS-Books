@@ -1,4 +1,5 @@
 """
+Author: Rafeh Qazi.
 Program: Anagram finder.
 Description: Return a sorted list with all non-anagrams omitted.
 Constraints: No imports.
