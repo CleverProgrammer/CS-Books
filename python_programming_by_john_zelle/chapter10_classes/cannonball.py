@@ -1,5 +1,5 @@
-import python_programming_by_john_zelle.chapter10_classes.graphics as graphics
 import math
+import python_programming_by_john_zelle.chapter10_classes.graphics as graphics
 
 
 def main():
@@ -10,6 +10,7 @@ def main():
     while y_pos >= 0.0:
         x_pos, y_pos, y_velocity = update_cannon_ball(time, x_pos, y_pos, x_velocity, y_velocity)
         move_cannon(win, my_cannon, x_pos, y_pos)
+        click_in_circle(win, my_cannon)
     print('\nDistance traveled {0:0.1f} meters'.format(x_pos))
 
 
@@ -66,19 +67,19 @@ def draw_cannon():
     return win, my_cannon
 
 
-def move_cannon(Window, Circle, x_pos, y_pos):
+def move_cannon(window, circle, x_pos, y_pos):
     """
     Move the cannon on the screen with the given x, y positions
-    :param Circle:
+    :param circle:
     :param x_pos:
     :param y_pos:
     :return:
     """
-    Window.getMouse()
-    Circle.move(-x_pos, -y_pos)
+    window.getMouse()
+    circle.move(-x_pos, -y_pos)
 
 
-def in_circle(mouse_xy, circle_xy, radius):
+def in_circle(mouse_point, circle_origin, radius):
     """
     Takes the position of the mouse and the circle origin and returns True
     if mouseclick was within the circle and False if the click was outside.
@@ -90,26 +91,18 @@ def in_circle(mouse_xy, circle_xy, radius):
     return math.sqrt((mouse_point.x - circle_origin.x) ** 2 + (mouse_point.y - circle_origin.y) ** 2) < radius
 
 
-def moving_circle():
-    win = graphics.GraphWin('THE GAME OF GAMES!')
-    circle_origin = graphics.Point(100, 100)
-    my_circle = graphics.Circle(circle_origin, 20)
-    my_circle.draw(win)
-    for i in range(10):
-        try:
-            my_circle.move(8, 8)
-            mouse_position = win.getMouse()
-            print('You clicked at', mouse_position.getX(), mouse_position.getY())
-            print('Radius', my_circle.getRadius())
-            if in_circle(mouse_position, my_circle.getCenter(), my_circle.radius):
-                print('You clicked inside the circle!')
-        except GraphicsError:
-            print('You closed the graphics window!')
-            return
+def click_in_circle(window, circle):
+    """
+    Detect if the user clicked inside the circle. Take as input the window and circle object.
+    :param window: object
+    :param circle: object
+    """
+    mouse_position = window.getMouse()
+    if in_circle(mouse_position, circle.getCenter(), circle.radius):
+        print('You clicked inside the circle!')
 
 
 # moving_circle()
-
 
 
 if __name__ == '__main__':
