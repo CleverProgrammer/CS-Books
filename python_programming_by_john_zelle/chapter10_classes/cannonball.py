@@ -1,5 +1,5 @@
 import math
-import python_programming_by_john_zelle.chapter10_classes.graphics as graphics
+import python_programming_by_john_zelle.graphics as graphics
 
 
 def main():
