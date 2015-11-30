@@ -70,10 +70,9 @@ def draw_cannon():
 def move_cannon(window, circle, x_pos, y_pos):
     """
     Move the cannon on the screen with the given x, y positions
-    :param circle:
-    :param x_pos:
-    :param y_pos:
-    :return:
+    :param circle: object
+    :param x_pos: object
+    :param y_pos: object
     """
     window.getMouse()
     circle.move(-x_pos, -y_pos)
@@ -102,21 +101,5 @@ def click_in_circle(window, circle):
         print('You clicked inside the circle!')
 
 
-# moving_circle()
-
-
 if __name__ == '__main__':
     main()
-
-# EXAMPLE PROGRAM
-# def main():
-#     win = GraphWin("Click Me!")
-#     for i in range(10):
-#         try:
-#             p = win.getMouse()
-#             print('You clicked at', p.getX(), p.getY())
-#         except GraphicsError:
-#             print('You closed the graphics window!')
-#             return
-#
-# main()

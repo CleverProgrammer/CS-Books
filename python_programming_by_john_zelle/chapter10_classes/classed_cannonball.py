@@ -4,7 +4,7 @@ GRAVITY = 9.8
 
 class Projectile:
     """
-    Model a projectile.
+    Provides a simple class for modeling the flight of projecticles.
 
     >>> c = Projectile(angle=60, velocity=50, height=20)
     >>> c.x_pos
@@ -55,3 +55,5 @@ if __name__ == '__main__':
     import doctest
     doctest.testmod()
     # main()
+
+print(Projectile.update.__doc__)

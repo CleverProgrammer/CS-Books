@@ -18,6 +18,8 @@ def anagram_finder(word_list):
     []
     >>> anagram_finder(['ox', 'xo', 'caracer', 'racecar'])
     ['caracer', 'ox', 'racecar', 'xo']
+    >>> anagram_finder(['star', 'star'])
+    ['star', 'star']
     """
     anagrams = []
     for word in word_list:
