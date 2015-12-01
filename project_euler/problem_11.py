@@ -4,6 +4,8 @@ Project Euler Problem 11: https://projecteuler.net/problem=11
 Description: Find the largest product of four consecutive numbers in the grid.
 Constraints: None.
 """
+from functools import reduce
+from operator import mul
 
 
 def main():
@@ -12,10 +14,11 @@ def main():
     """
     filename = 'problem_11_grid.txt'
     grid = text_to_grid(filename)
-    product_of_rows()
-    product_of_cols()
-    product_of_diagonals()
-    max_product()
+    row_prod = product_of_rows(grid)
+    col_prod = product_of_cols(grid)
+    diag_prod = product_of_diagonals(grid)
+    max_prod = max_product(row_prod, col_prod, diag_prod)
+    print(max_prod)
     pass
 
 
@@ -35,7 +38,16 @@ def product_of_rows(grid):
     :param grid: list
     :return: list
     """
-    return
+    biggest = []
+    result = 0
+    last_idx = len(grid[0]) - 1
+    for idx, _ in enumerate(grid[0]):
+        if idx != last_idx:
+            return biggest
+        current_four = grid[0][idx: idx + 4]
+        if reduce(mul, current_four) > result:
+            biggest = current_four
+    return biggest
 
 
 def product_of_cols(grid):
@@ -59,6 +71,12 @@ def product_of_diagonals(grid):
 def max_product(*args):
     """
     Takes a list of products and returns the list with the max product.
-    :param args: list(s)
+    :param args: list
     :return: list
     """
+    biggest = []
+    current_product = 0
+    for _list in args:
+        if reduce(mul, _list) > current_product:
+            biggest = _list
+    return biggest

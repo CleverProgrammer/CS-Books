@@ -2,7 +2,7 @@ from project_euler.problem_11 import *
 import unittest
 
 
-class MyTestCase(unittest.TestCase):
+class TestProblem11(unittest.TestCase):
     def test_text_to_grid(self):
         """
         =================== problem_11_grid.txt ===================
@@ -51,6 +51,20 @@ class MyTestCase(unittest.TestCase):
             [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
         ]
         self.assertEqual(text_to_grid('problem_11_grid.txt'), expected)
+
+    def test_product_of_rows(self):
+        computed = [
+            [0, 0, 0, 1, 2, 3, 4, 0, 0, 0]
+        ]
+        self.assertEqual(product_of_rows(computed), [1, 2, 3, 4])
+
+    def test_max_product(self):
+        a = [1, 1, 1]
+        b = [1, 2, 3]
+        c = [1, 3, 0]
+        d = [3, 5, 7, 9]
+        e = [6, 9, 15, 3, 0]
+        self.assertEqual(max_product(a, b, c, d, e), d)
 
 
 if __name__ == '__main__':
