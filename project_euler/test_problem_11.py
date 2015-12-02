@@ -57,6 +57,80 @@ class TestProblem11(unittest.TestCase):
             [0, 0, 0, 1, 2, 3, 4, 0, 0, 0]
         ]
         self.assertEqual(product_of_rows(computed), [1, 2, 3, 4])
+        self.assertEqual(product_of_rows([[0, 1, 0, 1, 2, 3, 4, 0, 0]]), [1, 2, 3, 4])
+        computed = [
+            [1, 2, 3, 4],
+            [5, 6, 7, 8]
+        ]
+        self.assertEqual(product_of_rows(computed), [5, 6, 7, 8])
+        computed = [
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [0, 9, 9, 9],
+            [9, 1, 1, 1],
+            [9, 9, 8, 9],
+            [7, 1, 7, 9],
+            [9, 8, 9, 9, 2]
+        ]
+        self.assertEqual(product_of_rows(computed), [9, 9, 8, 9])
+        computed = [
+            [0, 0, 0, 4, 1, 2, 3, 4, 0, 1, 0],
+            [0, 0, 5, 6, 7, 8, 0, 0, 3, 0, 0],
+            [0, 0, 0, 9, 9, 9, 0, 0, 1, 0, 0],
+            [0, 2, 9, 1, 9, 9, 0, 0, 3, 9, 0],
+            [9, 9, 8, 9, 0, 0, 0, 0, 0, 0, 0],
+            [7, 1, 7, 9, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 9, 8, 9, 9, 2, 0, 0, 0, 0]
+        ]
+        self.assertEqual(product_of_rows(computed), [9, 9, 8, 9])
+
+    def test_product_of_cols(self):
+        computed = [
+            [1],
+            [2],
+            [3],
+            [4]
+        ]
+        self.assertEqual(product_of_cols(computed), [1, 2, 3, 4])
+        computed = [
+            [1, 1],
+            [2, 4],
+            [3, 3],
+            [4, 5]
+        ]
+        self.assertEqual(product_of_cols(computed), [1, 4, 3, 5])
+        computed = [
+            [0, 0, 0, 4],
+            [0, 0, 5, 6],
+            [0, 9, 0, 2],
+            [0, 8, 9, 3],
+            [9, 9, 8, 9],
+            [7, 6, 7, 1],
+            [0, 0, 9, 8]
+        ]
+        self.assertEqual(product_of_cols(computed), [9, 8, 7, 9])
+
+    def test_product_of_diagonals(self):
+        computed = [
+            [0, 0, 0, 4, 5],
+            [1, 0, 5, 6, 5],
+            [0, 9, 0, 2, 5],
+            [0, 8, 9, 3, 5],
+            [9, 9, 8, 9, 5],
+            [7, 6, 7, 1, 5],
+            [0, 0, 9, 8, 5]
+        ]
+        self.assertEqual(product_of_diagonals(computed), [1, 9, 9, 9])
+        computed = [
+            [0, 0, 0, 4, 6],
+            [1, 0, 5, 6, 5],
+            [0, 9, 0, 2, 5],
+            [9, 8, 9, 3, 5],
+            [9, 9, 8, 9, 5],
+            [7, 6, 2, 1, 5],
+            [0, 0, 9, 9, 5]
+        ]
+        self.assertEqual(product_of_diagonals(computed), [9, 9, 9, 5])
 
     def test_max_product(self):
         a = [1, 1, 1]
@@ -64,7 +138,7 @@ class TestProblem11(unittest.TestCase):
         c = [1, 3, 0]
         d = [3, 5, 7, 9]
         e = [6, 9, 15, 3, 0]
-        self.assertEqual(max_product(a, b, c, d, e), d)
+        self.assertEqual(max_product(a, b, c, d, e), 3 * 5 * 7 * 9)
 
 
 if __name__ == '__main__':

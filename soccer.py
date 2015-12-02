@@ -6,9 +6,8 @@ import random
 from collections import defaultdict
 
 
-ALL_TEAMS = ['pakistan', 'athletico madrid', 'london fc', 'man blue',
-                  'bayern', 'psg', 'spain', 'germany', 'argentina',
-                  'barcelona', 'real madrid', 'my club', 'barcelona']
+ALL_TEAMS = ['barcelona', 'real madrid', 'london fc', 'man blue',
+             'bayern munchen', 'atletico madrid', 'juventus', 'psg']
 
 
 def make_2_random_groups(all_teams):
@@ -31,9 +30,9 @@ def make_2_random_groups(all_teams):
 print(*make_2_random_groups(ALL_TEAMS))
 
 
-def pick_random_teams(all_teams, person1, person2, person3):
+def pick_random_teams(all_teams, person1, person2):
     """
-    Take a list of teams as input and return them randomly for 3 people.
+    Take a list of teams as input and returns them randomly for 2 people.
     :param all_teams: list
     :param person1: str
     :param person2: str
@@ -43,8 +42,7 @@ def pick_random_teams(all_teams, person1, person2, person3):
     all_teams = list(set(all_teams.copy()))
     first_guy = defaultdict(list)
     second_guy = defaultdict(list)
-    third_guy = defaultdict(list)
-    next_turn = ('0 1 2 ' * int(len(all_teams) / 3)).split()
+    next_turn = ('0 1 ' * int(len(all_teams) / 2)).split()
     print(next_turn)
     for i in range(len(all_teams)):
         team = all_teams.pop(all_teams.index(random.choice(all_teams)))  # randomly popoff from list.
@@ -53,8 +51,6 @@ def pick_random_teams(all_teams, person1, person2, person3):
             first_guy[person1].append(team)
         elif turn == '1':
             second_guy[person2].append(team)
-        else:
-            third_guy[person3].append(team)
-    return first_guy, second_guy, third_guy
+    return first_guy, second_guy
 
-print(*pick_random_teams(ALL_TEAMS, 'waqas', 'saqib', 'rafeh'))
+print(*pick_random_teams(ALL_TEAMS, 'rafeh', 'saqib'))
