@@ -47,7 +47,7 @@ def make_2_random_groups(all_teams):
 
 def pick_random_teams(all_teams, person1, person2, person3):
     """
-    Take a list of teams as input and returns them randomly for 2 people.
+    Take a list of teams as input and returns them randomly for 3 people.
     :param all_teams: list
     :param person1: str
     :param person2: str
@@ -69,7 +69,7 @@ def pick_random_teams(all_teams, person1, person2, person3):
         elif turn == '2':
             third_guy[person3].append(team_)
 
-    return first_guy, second_guy, third_guy
+    return dict(first_guy), dict(second_guy), dict(third_guy)
 
 
 def possible_combination_of_games(all_teams, picked_teams):
@@ -82,23 +82,39 @@ def possible_combination_of_games(all_teams, picked_teams):
     return list(itertools.combinations(all_teams + picked_teams, 2))
 
 
-def next_team():
+def next_team(all_teams, person1, person2, person3):
+    for team_ in pick_random_teams(all_teams, person1, person2, person3):
+        yield dict(team_)
 
 
 def next_qualifier_game(all_teams, picked_teams):
     """
     takes in as input all possible game combinations
     and yields the next game.
+
+    Picks the teams and games and assigns the teams
+    to the correct people.
     :yield: tuple
     """
     matches = possible_combination_of_games(all_teams, picked_teams)
     total_games = len(possible_combination_of_games(all_teams, picked_teams))
     all_matches = []
+    team_ = next_team(all_teams, 'rafeh', 'saqib', 'waqas')
     print("------------------ALL POSSIBLE GAMES ({0})-----------------------".format(total_games))
     for _ in possible_combination_of_games(all_teams, picked_teams):
         # yield ' VS. '.join(matches.pop(matches.index(random.choice(matches))))
         all_matches.append([' VS. '.join(matches.pop(matches.index(random.choice(matches)))), '',
-                            '', '', '', '', '', '', '', '', '', '', ''])
+                            '', '', '', '', '', '', '', '', '', ''])
+    teams_ = pick_random_teams(all_teams, 'rafeh', 'saqib', 'waqas')
+    rafeh = teams_[0]['rafeh']
+    saqib = teams_[1]['saqib']
+    waqas = teams_[2]['waqas']
+    for idx, _team in enumerate(rafeh):
+        all_matches[idx][9] = _team
+    for idx, _team in enumerate(saqib):
+        all_matches[idx][10] = _team
+    for idx, _team in enumerate(waqas):
+        all_matches[idx][11] = _team
     return all_matches
 
 
