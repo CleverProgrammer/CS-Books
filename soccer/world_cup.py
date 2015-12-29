@@ -82,6 +82,9 @@ def possible_combination_of_games(all_teams, picked_teams):
     return list(itertools.combinations(all_teams + picked_teams, 2))
 
 
+def next_team():
+
+
 def next_qualifier_game(all_teams, picked_teams):
     """
     takes in as input all possible game combinations
@@ -94,7 +97,8 @@ def next_qualifier_game(all_teams, picked_teams):
     print("------------------ALL POSSIBLE GAMES ({0})-----------------------".format(total_games))
     for _ in possible_combination_of_games(all_teams, picked_teams):
         # yield ' VS. '.join(matches.pop(matches.index(random.choice(matches))))
-        all_matches.append([' VS. '.join(matches.pop(matches.index(random.choice(matches))))])
+        all_matches.append([' VS. '.join(matches.pop(matches.index(random.choice(matches)))), '',
+                            '', '', '', '', '', '', '', '', '', '', ''])
     return all_matches
 
 
